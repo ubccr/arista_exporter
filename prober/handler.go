@@ -46,7 +46,7 @@ func Handler(w http.ResponseWriter, r *http.Request, logger log.Logger, params u
 
 	modules := params.Get("module")
 	if modules == "" {
-		modules = "system"
+		modules = "power"
 	}
 
 	probers := make([]Prober, 0)
