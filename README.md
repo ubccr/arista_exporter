@@ -58,6 +58,7 @@ transport=https
     target_label: __param_module
 ```
 
+Example systemd unit file [here](systemd/arista_exporter.service)
 
 ## License
 
