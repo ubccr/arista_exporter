@@ -1,0 +1,13 @@
+[Unit]
+Description=Arista exporter for Prometheus
+Documentation=https://github.com/ubccr/arista_exporter
+After=network.target
+
+[Service]
+Restart=always
+User=prometheus
+Group=prometheus
+ExecStart=/usr/local/bin/arista_exporter --config.file=/etc/prometheus/eapi.conf
+
+[Install]
+WantedBy=multi-user.target
