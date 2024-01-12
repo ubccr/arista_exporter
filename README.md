@@ -30,6 +30,13 @@ username=admin
 password=root
 enablepwd=passwd
 transport=https
+
+[connection:arista2.example.com]
+host=arista2.example.com
+username=admin
+password=root
+enablepwd=passwd
+transport=https
 ```
 
 ## Prometheus configs
@@ -52,13 +59,48 @@ transport=https
     target_label: __param_target
   - source_labels: [__param_target]
     target_label: instance
-  - target_label: __address__
-    replacement: 127.0.0.1:9465
   - source_labels: [module]
     target_label: __param_module
+  - target_label: __address__
+    replacement: 127.0.0.1:9465
 ```
 
 Example systemd unit file [here](systemd/arista_exporter.service)
+
+## Sample Metrics
+
+```
+arista_power_supply_state{powerSupply="1",state="ok"} 1
+arista_power_supply_state{powerSupply="2",state="ok"} 1
+arista_redundancy_all_agent_sso_ready 1
+arista_redundancy_communication_desc{status="Up"} 1
+arista_redundancy_last_mode_change_time{reason="Supervisor has control of the active supervisor lock"} 1.6874010372967267e+09
+arista_redundancy_mode{status="active"} 1
+arista_redundancy_peer_mode{status="standby"} 1
+arista_redundancy_slot_id{unitDesc="Primary"} 1
+arista_redundancy_switchover_count 0
+arista_redundancy_switchover_ready 1
+arista_mlag_config_sanity{status="consistent"} 1
+arista_mlag_detail{mlagState="secondary",peerMlagState="primary"} 1
+arista_mlag_failover{cause=""} 0
+arista_mlag_last_state_change 336.392112271
+arista_mlag_local_inf_status{status="up"} 1
+arista_mlag_neg_status{status="connected"} 1
+arista_mlag_peer_link{status="up"} 1
+arista_mlag_ports{state="activeFull"} 2
+arista_mlag_ports{state="activePartial"} 0
+arista_mlag_ports{state="configured"} 0
+arista_mlag_ports{state="disabled"} 0
+arista_mlag_ports{state="inactive"} 8
+arista_mlag_state{state="active"} 1
+arista_mlag_state_changes 2
+arista_portchannel_ports{interface="Port-Channel1",state="active"} 0
+arista_portchannel_ports{interface="Port-Channel1",state="inactive"} 2
+arista_portchannel_ports{interface="Port-Channel2",state="active"} 1
+arista_portchannel_ports{interface="Port-Channel2",state="inactive"} 1
+arista_portchannel_ports{interface="Port-Channel3",state="active"} 2
+arista_portchannel_ports{interface="Port-Channel3",state="inactive"} 0
+```
 
 ## License
 
